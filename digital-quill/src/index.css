@@ -1,0 +1,90 @@
+/* Google fonts must come first for PostCSS */
+@import url('https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;600;700&family=Dancing+Script:wght@600&display=swap');
+
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+/* Retro "book & quill" theme base styles */
+@layer base {
+  :root {
+    --paper: #f5f0e6;
+    --ink: #3e2c1c;
+    --accent: #6a4e2c;
+    --muted: #a8977a;
+  }
+
+  html, body, #root {
+    height: 100%;
+  }
+
+  body {
+    font-family: 'Playfair Display', serif;
+    background-color: var(--paper);
+    color: var(--ink);
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+  }
+
+  h1, h2, h3 { color: var(--ink); }
+
+  .brand { font-family: 'Dancing Script', cursive; }
+}
+
+/* Components */
+@layer components {
+  .btn {
+    @apply inline-flex items-center justify-center px-5 py-2 rounded-md font-semibold transition-transform duration-200 ease-out;
+  }
+
+  .btn:hover { transform: translateY(-2px) scale(1.05); }
+  .btn:active { transform: scale(0.98); }
+
+  .btn-primary {
+    background: linear-gradient(90deg,#d8c3a5,#e7d7c1);
+    color: var(--ink);
+    border: 1px solid rgba(62,44,28,0.08);
+  }
+
+  .btn-secondary {
+    background: linear-gradient(90deg,#a68b6a,#8c6f4f);
+    color: white;
+    border: 1px solid rgba(62,44,28,0.08);
+  }
+
+  .card {
+    @apply bg-white/90 border border-[#d6c6a5] rounded-xl p-6 shadow-md overflow-hidden break-words;
+    transition: transform 0.2s ease, box-shadow 0.2s ease;
+  }
+
+  .card:hover { transform: translateY(-4px); box-shadow: 0 6px 16px rgba(0,0,0,0.1); }
+
+  .small-muted { color: var(--muted); }
+  .nav-fixed-space { padding-top: 72px; }
+  .notify-dot {
+    width: 10px; height: 10px;
+    background: #D9534F;
+    border-radius: 999px;
+    display: inline-block;
+    box-shadow: 0 0 0 3px rgba(217,83,79,0.12);
+  }
+
+  .reaction-btn { @apply inline-flex items-center gap-1 cursor-pointer transition-transform duration-200; }
+  .reaction-btn:hover { transform: scale(1.15); color: var(--accent); }
+  .reaction-btn:active { transform: scale(0.95); }
+}
+
+/* Small fade-in animation */
+@keyframes fade-in {
+  from { opacity: 0; transform: translateY(8px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+.fade-in { animation: fade-in 0.45s ease both; }
+
+@media (max-width: 768px) {
+  .card { padding: 1.25rem; }
+  .btn { padding: 0.5rem 1rem; }
+}
